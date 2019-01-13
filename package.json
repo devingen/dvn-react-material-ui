@@ -1,0 +1,101 @@
+{
+  "name": "dvn-react-material-ui",
+  "version": "0.0.1",
+  "description": "Devingen form implementation with Material UI framework.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm-run-all build-css lint build-js",
+    "build-css": "node-sass-chokidar --include-path ./lib --include-path ./node_modules lib/ -o dist/",
+    "build-js": "tsc",
+    "test-ci": "npm-run-all build-css-test test-wc",
+    "build-css-test": "node-sass-chokidar --include-path ./lib --include-path ./node_modules lib/ -o lib/",
+    "test-wc": "jest --coverage",
+    "test": "jest --watch",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devingen/dvn-react-material-ui.git"
+  },
+  "author": "eluleci",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/devingen/dvn-react-material-ui/issues"
+  },
+  "homepage": "https://github.com/devingen/dvn-react-material-ui#readme",
+  "jest": {
+    "collectCoverageFrom": [
+      "lib/**/*.{js,jsx,ts,tsx}",
+      "!**/*.d.ts"
+    ],
+    "testMatch": [
+      "<rootDir>/**/__tests__/**/*.(j|t)s?(x)",
+      "<rootDir>/**/+(*.)(spec|test).(j|t)s?(x)"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|ts|tsx)$"
+    ],
+    "moduleNameMapper": {
+      "^.+\\.css$": "<rootDir>/config/jest/styleMock.js"
+    },
+    "moduleFileExtensions": [
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "web.js",
+      "js",
+      "web.jsx",
+      "jsx",
+      "json",
+      "node",
+      "mjs"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.test.json"
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.6",
+    "@types/enzyme": "^3.1.15",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.3.10",
+    "@types/prop-types": "^15.5.6",
+    "babel-jest": "^23.6.0",
+    "coveralls": "^3.0.2",
+    "dvn-react-core": "0.0.2",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "jest": "^23.6.0",
+    "node-sass-chokidar": "^1.3.4",
+    "npm-run-all": "^4.1.5",
+    "ts-jest": "^23.10.5",
+    "tslib": "^1.9.3",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "@date-io/moment": "^1.0.1",
+    "classnames": "^2.2.6",
+    "material-ui-pickers": "^2.1.1",
+    "moment": "^2.23.0"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^3.8.3",
+    "@material-ui/icons": "^3.0.2",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  }
+}
