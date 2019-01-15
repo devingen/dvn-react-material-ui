@@ -88,7 +88,7 @@
     "@types/material-ui": "^0.21.5",
     "@types/react-tap-event-plugin": "0.0.30",
     "classnames": "^2.2.6",
-    "dvn-react-core": "0.0.2",
+    "dvn-react-core": "0.0.3",
     "material-ui": "^0.17.2",
     "moment": "^2.23.0",
     "react-tap-event-plugin": "^2.0.1"
