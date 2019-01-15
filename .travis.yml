@@ -3,7 +3,7 @@ node_js :
  - stable
 install:
  - npm install
- - npm install @material-ui/core@3.8.3 @material-ui/icons@3.0.2 @types/react @types/react-dom react react-dom
+ - npm install @types/react @types/react-dom material-ui@0.17.2 react react-dom
 script:
  - npm run lint
  - npm run test-ci

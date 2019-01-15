@@ -1,8 +1,7 @@
-import { Star } from '@material-ui/icons';
 import { BaseInputProps } from 'dvn-react-core';
+import Star from 'material-ui/svg-icons/toggle/star';
 import * as React from 'react';
 import { colors, metrics } from '../../constants';
-
 import { RatingStars } from './index';
 
 const starStyle = {
@@ -25,7 +24,7 @@ export class InputRatingStars extends React.Component<IProps> {
     const hasError = errors && errors.length > 0;
     const error = hasError ? errors![0] : undefined;
 
-    const stars = [];
+    const stars: any = [];
     for (let i = 0; i < starCount; i += 1) {
 
       const onClick = () => onChange((i + 1) / starCount);

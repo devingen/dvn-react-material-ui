@@ -1,5 +1,5 @@
-import { Checkbox, Chip, FormControlLabel, FormGroup, MenuItem, Select } from '@material-ui/core';
 import { BaseInputProps, MultipleChoice } from 'dvn-react-core';
+import Checkbox from 'material-ui/Checkbox';
 import * as React from 'react';
 import { colors, metrics } from '../../constants';
 
@@ -39,11 +39,13 @@ export default class InputMultipleChoice extends React.Component<IProps> {
       component = this.renderPreview(field, value, disabled);
     } else if (field.inputType === 'select') {
       // render select
-      component = this.renderSelect(field, value, disabled);
+      // component = this.renderSelect(field, value, disabled);
+      component = this.renderCheckbox(field, value, disabled);
 
     } else if (field.inputType === 'tag-cloud') {
       // render tag cloud
-      component = this.renderTagCloud(field, value, disabled);
+      // component = this.renderTagCloud(field, value, disabled);
+      component = this.renderCheckbox(field, value, disabled);
 
     } else {
       // render checkbox as default
@@ -67,12 +69,7 @@ export default class InputMultipleChoice extends React.Component<IProps> {
       return (
         <div>
           {getSelectedOptions(field.options, value).map(o =>
-            <Chip
-              key={o.value}
-              color={'secondary'}
-              style={{ margin: '2px', color: 'white' }}
-              label={o.label}
-            />
+            'Chip'
           )}
         </div>
       );
@@ -85,115 +82,82 @@ export default class InputMultipleChoice extends React.Component<IProps> {
     );
   };
 
-  private renderSelect = (field: MultipleChoice, value?: any[], disabled?: boolean) => {
+  // private renderSelect = (field: MultipleChoice, value?: any[], disabled?: boolean) => {
+  //
+  //   return (
+  //     <SelectField
+  //       value={value}
+  //       id={field.id}
+  //       name={field.id}
+  //       multiple={true}
+  //       autoWidth={true}
+  //       onChange={(e, i, v) => this.onSelectChange(v)}
+  //       hintText={field.placeholder}
+  //     >
+  //       {field.options.map((o: any) => {
+  //
+  //         if (o.group && o.options) {
+  //           // render grouped options
+  //           return (o.options.map((ogo: any) =>
+  //             <MenuItem key={ogo.value} value={ogo.value} disabled={disabled}>
+  //               {ogo.label}
+  //             </MenuItem>,
+  //           ));
+  //
+  //         } else {
+  //           // render simple options
+  //           return (
+  //             <MenuItem key={o.value} value={o.value} disabled={disabled}>
+  //               {o.label}
+  //             </MenuItem>
+  //           );
+  //         }
+  //
+  //       })}
+  //
+  //     </SelectField>
+  //   );
+  // };
 
-    return (
-      <Select
-        multiple={true}
-        displayEmpty={true}
-        style={{ minWidth: '120px' }}
-        value={(value && value.length > 0) ? value : ['']}
-        onChange={this.onSelectChange}
-        inputProps={{
-          id: field.id,
-          name: field.id,
-        }}
-      >
-
-        {field.placeholder &&
-        <MenuItem value={''} disabled={true}>
-          {field.placeholder}
-        </MenuItem>
-        }
-
-        {field.options.map((o: any) => {
-
-          if (o.group && o.options) {
-            // render grouped options
-            return (
-              <React.Fragment>
-                {o.options.map((ogo: any) =>
-                  <MenuItem key={ogo.value} value={ogo.value} disabled={disabled}>
-                    {ogo.label}
-                  </MenuItem>,
-                )}
-              </React.Fragment>
-            );
-
-          } else {
-            // render simple options
-            return (
-              <MenuItem key={o.value} value={o.value} disabled={disabled}>
-                {o.label}
-              </MenuItem>
-            );
-          }
-
-        })}
-
-      </Select>
-    );
-  };
-
-  private renderTagCloud = (field: MultipleChoice, value?: any[], disabled?: boolean) => {
-
-    return (
-      <div>
-        {(field.options || []).map((o: any) =>
-          <Chip
-            key={o.value}
-            color={value && value.indexOf(o.value) > -1 ? 'secondary' : undefined}
-            onClick={() => this.onOptionClick(o.value)}
-            style={{ margin: '2px', color: value && value.indexOf(o.value) > -1 ? 'white' : 'inherit' }}
-            label={o.label}
-            clickable={true}
-            variant={value && value.indexOf(o.value) > -1 ? 'default' : 'outlined'}
-          />
-        )}
-      </div>
-    );
-  };
+  // private renderTagCloud = (field: MultipleChoice, value?: any[], disabled?: boolean) => {
+  //
+  //   return (
+  //     <div>
+  //       {(field.options || []).map((o: any) =>
+  //         'Chip'
+  //       )}
+  //     </div>
+  //   );
+  // };
 
   private renderCheckbox = (field: MultipleChoice, value?: any[], disabled?: boolean) => {
 
     return (
-      <FormGroup>
-
-        {field.placeholder &&
-        <MenuItem value={''} disabled={true}>
-          <em>{field.placeholder}</em>
-        </MenuItem>
-        }
-
+      <div>
         {field.options.map((o: MultipleChoice.Option) => {
           return (
-            <FormControlLabel
+            <Checkbox
               key={o.value}
-              disabled={disabled}
-              control={
-                <Checkbox
-                  checked={value && value.indexOf(o.value) > -1}
-                  onChange={() => this.onOptionClick(o.value)}
-                  value={o.value}
-                />
-              }
+              checked={value && value.indexOf(o.value) > -1}
               label={o.label}
+              onClick={() => this.onOptionClick(o.value)}
             />
           );
         })}
-      </FormGroup>
+      </div>
     );
   };
 
-  private onSelectChange = (event: any) => {
-
-    const value = event.target.value;
-    if (value && value[0] === '') {
-      value.splice(0, 1);
-    }
-
-    this.props.onChange(value);
-  };
+  // private onSelectChange = (value: any) => {
+  //   // tslint:disable
+  //   console.log('event.target.value', value);
+  //
+  //   if (value && value[0] === '') {
+  //     value.splice(0, 1);
+  //   }
+  //
+  //   this.props.onChange(value);
+  // };
 }
 
 /**

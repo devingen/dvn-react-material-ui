@@ -1,5 +1,3 @@
-import MomentUtils from '@date-io/moment';
-import { Button } from '@material-ui/core';
 import * as cn from 'classnames';
 import { generateField } from 'dvn-react-core/dist/fields/FieldGenerator';
 import Form, {
@@ -9,10 +7,16 @@ import Form, {
   generateState,
   getFirstError,
   handleExtraButtonClick,
-  SubmitCallback
+  SubmitCallback,
 } from 'dvn-react-core/dist/form/Form';
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as React from 'react';
+import * as injectTapEventPlugin from 'react-tap-event-plugin';
+
 import { colors } from '../constants';
 import '../inputs/DateInput';
 import '../inputs/MultipleChoice';
@@ -22,6 +26,8 @@ import '../inputs/SectionHeader';
 import '../inputs/SingleChoice';
 import '../inputs/TextInput';
 import './Form.css';
+
+injectTapEventPlugin();
 
 export class MaterialForm extends Form {
 
@@ -54,8 +60,7 @@ export class MaterialForm extends Form {
     let order = 0;
 
     return (
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <form
           className={cn({
             'dvn-form': true,
@@ -126,28 +131,27 @@ export class MaterialForm extends Form {
             {error && <span style={{ color: colors.error, marginRight: '1rem' }}>{error}</span>}
 
             {extraButtons!.map(button =>
-              <Button
+              <FlatButton
+                secondary={true}
                 key={button.label}
-                type={button.type}
+                label={button.label}
                 disabled={button.loading}
                 onClick={() => this.onExtraButtonClick(button.onClick)}
                 style={{ marginRight: '1rem' }}
-              >
-                {button.label}
-              </Button>,
+              />
             )}
 
             {submitButtonLabel &&
-            <Button
-              type="submit"
+            <RaisedButton
+              label={submitButtonLabel}
               disabled={loading}
-            >
-              {submitButtonLabel}
-            </Button>
+              primary={true}
+              type="submit"
+            />
             }
           </div>
         </form>
-      </MuiPickersUtilsProvider>
+      </MuiThemeProvider>
     );
   }
 

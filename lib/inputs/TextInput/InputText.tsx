@@ -1,5 +1,5 @@
-import TextField from '@material-ui/core/TextField';
 import { BaseInputProps, TextInput } from 'dvn-react-core';
+import TextField from 'material-ui/TextField';
 import * as React from 'react';
 import { colors, metrics } from '../../constants';
 
@@ -47,11 +47,12 @@ export class InputText extends React.Component<IProps> {
   private renderTextInput = (field: TextInput, value?: string, disabled?: boolean) => (
     <TextField
       id={field.id}
-      value={value}
-      fullWidth={true}
-      disabled={disabled}
       type={field.inputType}
-      placeholder={field.placeholder}
+      fullWidth={true}
+      value={value}
+      hintText={field.placeholder}
+      disabled={disabled}
+      // errorText={this.state.errors.email}
       onChange={(e: any) => this.props.onChange(e.target.value)}
     />
   );
@@ -59,15 +60,16 @@ export class InputText extends React.Component<IProps> {
   private renderTextArea = (field: TextInput, value?: string, disabled?: boolean) => (
     <TextField
       id={field.id}
-      value={value}
+      type={field.inputType}
       fullWidth={true}
+      value={value}
+      hintText={field.placeholder}
       disabled={disabled}
+      // errorText={this.state.errors.email}
+      onChange={(e: any) => this.props.onChange(e.target.value)}
+      multiLine={true}
       rows={field.lines}
       rowsMax={field.linesMax}
-      multiline={true}
-      type={field.inputType}
-      placeholder={field.placeholder}
-      onChange={(e: any) => this.props.onChange(e.target.value)}
     />
   );
 }

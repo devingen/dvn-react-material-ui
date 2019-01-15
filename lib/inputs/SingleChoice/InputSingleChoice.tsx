@@ -1,5 +1,7 @@
-import { FormControlLabel, MenuItem, Radio, RadioGroup, Select } from '@material-ui/core';
 import { BaseInputProps, SingleChoice } from 'dvn-react-core';
+import MenuItem from 'material-ui/MenuItem';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import SelectField from 'material-ui/SelectField';
 import * as React from 'react';
 import { colors, metrics } from '../../constants';
 
@@ -40,69 +42,42 @@ export class InputSingleChoice extends React.Component<IProps> {
   private renderSelect = (field: SingleChoice, value?: string, disabled?: boolean) => {
 
     return (
-      <Select
-        displayEmpty={true}
-        style={{ minWidth: '120px' }}
-        value={value || ''}
-        onChange={(e: any) => this.props.onChange(e.target.value)}
-        inputProps={{
-          id: field.id,
-          name: field.id,
-        }}
+      <SelectField
+        value={value}
+        id={field.id}
+        name={field.id}
+        autoWidth={true}
+        disabled={disabled}
+        hintText={field.placeholder}
+        onChange={(e, i, v) => this.props.onChange(v)}
       >
-
-        {field.placeholder &&
-        <MenuItem value={''} disabled={disabled}>
-          <em>{field.placeholder}</em>
-        </MenuItem>
-        }
-
-        {field.options.map((o: any) => {
-
-          if (o.group && o.options) {
-            // render grouped options
-            return (
-              <React.Fragment>
-                {o.options.map((ogo: any) =>
-                  <MenuItem key={ogo.value} value={ogo.value} disabled={disabled}>
-                    {ogo.label}
-                  </MenuItem>,
-                )}
-              </React.Fragment>
-            );
-
-          } else {
-            // render simple options
-            return (
-              <MenuItem key={o.value} value={o.value} disabled={disabled}>
-                {o.label}
-              </MenuItem>
-            );
-          }
-
-        })}
-
-      </Select>
+        {field.options.map((o: SingleChoice.Option) =>
+          <MenuItem
+            key={o.value}
+            value={o.value}
+            primaryText={o.label}
+          />,
+        )}
+      </SelectField>
     );
   };
 
   private renderRadio = (field: SingleChoice, value?: string, disabled?: boolean) => (
 
-    <RadioGroup
-      aria-label={field.title}
-      name={field.id}
-      value={String(value)}
-      onChange={(e: any) => this.props.onChange(e.target.value)}
+    <RadioButtonGroup
+      name={name}
+      valueSelected={value}
+      style={{ marginTop: '0.2rem' }}
     >
-      {(field.options || []).map((o: SingleChoice.Option) =>
-        <FormControlLabel
+      {field.options.map(o =>
+        <RadioButton
           key={o.value}
-          value={String(o.value)}
-          disabled={disabled}
-          control={<Radio/>}
+          value={o.value}
           label={o.label}
-        />
+          disabled={disabled}
+          onClick={() => this.props.onChange(o.value)}
+        />,
       )}
-    </RadioGroup>
+    </RadioButtonGroup>
   );
 }

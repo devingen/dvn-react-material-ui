@@ -1,5 +1,6 @@
 import { BaseInputProps, DateInput } from 'dvn-react-core';
-import { DatePicker, TimePicker } from 'material-ui-pickers';
+import DatePicker from 'material-ui/DatePicker';
+import TimePicker from 'material-ui/TimePicker';
 import * as moment from 'moment';
 import * as React from 'react';
 import { colors, metrics } from '../../constants';
@@ -37,21 +38,35 @@ export class InputDate extends React.Component<IProps> {
     }
 
     return (
-      <React.Fragment>
+      <div>
         <div style={{ display: 'flex' }}>
           {(field.inputType === 'date' || field.inputType === 'dateTime') &&
           <DatePicker
+            autoOk={true}
+            fullWidth={true}
+            formatDate={(v: Date) => moment(v).format(field.dateFormat)}
+            // minDate={minDate}
+            // maxDate={maxDate}
             value={value}
-            onChange={this.onDateChange}
             disabled={disabled}
+            hintText={field.placeholder}
+            // errorText={this.state.errors.date}
+            onChange={(event, date) => this.onDateChange(date)}
           />
           }
 
           {(field.inputType === 'time' || field.inputType === 'dateTime') &&
           <TimePicker
+            autoOk={true}
+            format="24hr"
+            fullWidth={true}
+            // minDate={minDate}
+            // maxDate={maxDate}
             value={value}
             disabled={disabled}
-            onChange={this.onTimeChange}
+            hintText={field.inputType === 'dateTime' ? field.timeFormat : field.placeholder}
+            // errorText={this.state.errors.date}
+            onChange={(event, date) => this.onTimeChange(date)}
           />
           }
         </div>
@@ -59,7 +74,7 @@ export class InputDate extends React.Component<IProps> {
         <div style={{ color: colors.error, minHeight: metrics.verticalSpaceBetweenInputs }}>
           {error}
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 
@@ -70,15 +85,15 @@ export class InputDate extends React.Component<IProps> {
     if (value) {
       date.setHours(value.getHours());
       date.setMinutes(value.getMinutes());
-      date.setSeconds(value.getSeconds());
+      // date.setSeconds(value.getSeconds());
       date.setMilliseconds(value.getMilliseconds());
     }
     this.props.onChange(date);
   };
 
-  private onTimeChange = (momentDate: moment.Moment) => {
+  private onTimeChange = (passedValue: Date) => {
     const { value } = this.props;
-    const date = momentDate.toDate();
+    const date = new Date(passedValue);
 
     if (value) {
       date.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
