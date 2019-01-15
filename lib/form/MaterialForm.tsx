@@ -1,6 +1,6 @@
 import * as cn from 'classnames';
 import { generateField } from 'dvn-react-core/dist/fields/FieldGenerator';
-import Form, {
+import Form , {
   defaultProps,
   equals,
   FormProps,
