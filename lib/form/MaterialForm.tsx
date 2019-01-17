@@ -1,14 +1,15 @@
 import * as cn from 'classnames';
-import { generateField } from 'dvn-react-core/dist/fields/FieldGenerator';
-import Form, {
+import {
   defaultProps,
   equals,
+  Form,
   FormProps,
+  generateField,
   generateState,
   getFirstError,
   handleExtraButtonClick,
-  SubmitCallback,
-} from 'dvn-react-core/dist/form/Form';
+  SubmitCallback
+} from 'dvn-react-core';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as React from 'react';
@@ -119,7 +120,13 @@ export class MaterialForm extends Form {
           );
         })}
 
-        <div className="dvn-form-footer">
+        <div
+          style={{
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'flex-end',
+          }}
+        >
           {error && <span style={{ color: colors.error, marginRight: '1rem' }}>{error}</span>}
 
           {extraButtons!.map(button =>
