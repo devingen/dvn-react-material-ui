@@ -65,7 +65,7 @@ export class InputSingleChoice extends React.Component<IProps> {
   private renderRadio = (field: SingleChoice, value?: string, disabled?: boolean) => (
 
     <RadioButtonGroup
-      name={name}
+      name={field.id}
       valueSelected={value}
       style={{ marginTop: '0.2rem' }}
     >
