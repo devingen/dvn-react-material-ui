@@ -1,7 +1,7 @@
 import { BaseField, BaseInputProps, SubForm } from 'dvn-react-core';
 import * as React from 'react';
 import { colors, metrics } from '../../constants';
-import MaterialForm from '../../form/MaterialForm';
+import Form from '../../form/Form';
 
 export interface IProps extends BaseInputProps<SubForm, any> {
 }
@@ -18,7 +18,7 @@ export class InputSubForm extends React.Component<IProps> {
 
     return (
       <div>
-        <MaterialForm
+        <Form
           fields={fieldsWithValues}
           language={field.language}
           layout={field.layout}

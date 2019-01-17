@@ -1,8 +1,8 @@
 import * as cn from 'classnames';
 import {
   defaultProps,
+  DevingenForm,
   equals,
-  Form,
   FormProps,
   generateField,
   generateState,
@@ -23,7 +23,7 @@ import '../inputs/SectionHeader';
 import '../inputs/SingleChoice';
 import '../inputs/TextInput';
 
-export class MaterialForm extends Form {
+export class Form extends DevingenForm {
 
   public static defaultProps: Partial<FormProps> = defaultProps;
 
@@ -163,4 +163,4 @@ export class MaterialForm extends Form {
   }
 }
 
-export default MaterialForm;
+export default Form;

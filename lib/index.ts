@@ -1,6 +1,5 @@
-export { MaterialForm } from './form/MaterialForm';
+export { Form } from './form/Form';
 export {
-  Form,
   FormContext,
   SubmitCallbackResponse,
   SubmitCallback,
