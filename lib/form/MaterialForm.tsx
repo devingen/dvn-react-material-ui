@@ -104,7 +104,7 @@ export class MaterialForm extends Form {
 
                     {(layout === 'vertical' && field.description && field.description !== '') &&
                     <div className="description">
-                      {field.description}
+                      <div dangerouslySetInnerHTML={{ __html: field.description }} />
                     </div>
                     }
                   </label>
@@ -117,7 +117,7 @@ export class MaterialForm extends Form {
 
                   {(layout === 'horizontal' && field.description && field.description !== '') &&
                   <div className="dvn-form-label-right">
-                    {field.description}
+                    <div dangerouslySetInnerHTML={{ __html: field.description }} />
                   </div>
                   }
 
