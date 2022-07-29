@@ -97,7 +97,7 @@ export class Form extends DevingenForm {
 
                   {(layout === 'vertical' && field.description && field.description !== '') &&
                   <div className="description">
-                    {field.description}
+                    <div dangerouslySetInnerHTML={{ __html: field.description }} />
                   </div>
                   }
                 </label>
@@ -110,7 +110,7 @@ export class Form extends DevingenForm {
 
                 {(layout === 'horizontal' && field.description && field.description !== '') &&
                 <div className="dvn-form-label-right">
-                  {field.description}
+                  <div dangerouslySetInnerHTML={{ __html: field.description }} />
                 </div>
                 }
 
